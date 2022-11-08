@@ -1,12 +1,13 @@
 import { ThemeProvider } from "styled-components"
+import { Transactions } from "./Pages/Transactions "
+import { GlobalStyle } from "./styles/global"
 import { defaultTheme } from "./styles/themes/default"
 
 export function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <ThemeProvider theme={defaultTheme}>
-      <h1>Henlo</h1>
+      <GlobalStyle />
+     <Transactions />
     </ThemeProvider>
   )
 }
