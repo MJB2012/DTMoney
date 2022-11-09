@@ -28,20 +28,16 @@ export const SummaryCard = styled.div<SummaryCardProps>`
         align-items: center;
         justify-content: space-between;
         color: ${props => props.theme['gray-300']};
-        
+        font-size: 1.3rem;
     }
 
-    span {
-        font-size: 1.25rem;
-        margin-right: 0.5rem;
-    }
+
 
     strong {
         display: block;
         margin-top: 1rem;
         font-size: 2rem;
         font-weight: bold;
-        
     }
 
 

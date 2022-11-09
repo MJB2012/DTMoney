@@ -17,11 +17,12 @@ export const HeaderContent = styled.div`
 
 `
 export const NewTransactionBtn = styled.button`
+    font-family: 'Roboto Condensed', sans-serif;
     height: 50px;
     border: 0;
     background: ${props => props.theme['green-500']};
     color: ${props => props.theme['white']};
-    font-weight: bold;
+    font-weight: 600;
     padding: 0 1.25rem;
     border-radius: 6px;
     cursor: pointer;
