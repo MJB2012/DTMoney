@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as RadioGroup from "@radix-ui/react-radio-group"
 
 export const Overlay = styled(Dialog.Overlay)`
     position: fixed;
@@ -27,12 +28,19 @@ export const Content = styled(Dialog.Content)`
         flex-direction: column;
         gap: 1rem;
 
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
         input{
             border-radius: 6px;
             border: 0;
             background: ${props => props.theme['gray-900']};
             color: ${props => props.theme['gray-300']};
             padding: 1rem;
+
+            
+
 
             &::placeholder{
                 color: ${props => props.theme['gray-500']}
@@ -70,7 +78,7 @@ export const CloseBtn = styled(Dialog.Close)`
     font-size: 0;
 
 `
-export const TransactionType = styled.div`
+export const TransactionType = styled(RadioGroup.Root)`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -81,7 +89,7 @@ interface TransactionBtnProps {
     variant: 'income'|'outcome';
 }
 
-export const TransactionTypeBtn = styled.button<TransactionBtnProps>`
+export const TransactionTypeBtn = styled(RadioGroup.Item)<TransactionBtnProps>`
     background: ${props => props.theme['gray-700']};
     padding: 1rem;
     display: flex;
@@ -94,7 +102,21 @@ export const TransactionTypeBtn = styled.button<TransactionBtnProps>`
     color: ${props => props.theme['gray-300']};
 
     svg {
-        color: ${props => props.variant === 'income' ? props.theme['gray-300'] : props.theme['red-300']};
+        color: ${props => props.variant === 'income' ? props.theme['green-300'] : props.theme['red-300']};
+    }
+
+    &[data-state = 'unchecked']{
+        transition: background-color 0.1s;
+        background: ${props => props.theme['gray-600']};
+    }
+
+    &[data-state='checked'] {
+        color: ${props => props.theme.white};
+        background: ${props => props.variant === 'income' ? props.theme['green-500'] : props.theme['red-500']};
+
+        svg {
+            color: ${props => props.theme.white}
+        }
     }
 `;
 
