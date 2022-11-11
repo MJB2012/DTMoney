@@ -7,6 +7,14 @@
             "category": "Sale",
             "price": 5000,
             "createdAt": "2022-11-11T14:51:39.212Z"
+        },
+        {
+            "id": 1,
+            "description": "Web development",
+            "type": "outcome",
+            "category": "Personal Expenses",
+            "price": 3000,
+            "createdAt": "2022-11-11T14:51:39.212Z"
         }
     ]
 
