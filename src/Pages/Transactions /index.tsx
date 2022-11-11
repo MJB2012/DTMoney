@@ -1,53 +1,62 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../../Components/Header";
+import { NewTransactionModal } from "../../Components/NewTransactionModal";
 import { Summary } from "../../Components/Summary";
 import { SearchForm } from "./components/SearchForm";
 import { PriceHighlight, TransactionsContainer, TransactionsTable } from "./styles";
 
+interface Transaction {
+    id: number;
+    description: string;
+    type: 'income' | 'outcome';
+    price: number;
+    category: string;
+    createdAt: string;
+
+}
+
+
 export function Transactions() {
+    const [transactions, setTransactions] = useState<Transaction[]>([])
+
+    async function loadTransactions() {
+        const response = await fetch('http://localhost:3333/transactions')
+        const data = await response.json()
+
+        console.log(data)
+    }
+
     useEffect(() => {
-        fetch('http://localhost:3333/transactions')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-        })
-     }, [])
-    
-   
-    
+        loadTransactions()
+    }, [])
+
+
+
     return (
         <div>
             <Header />
             <Summary />
-
             <TransactionsContainer>
-            
-            <SearchForm />
-            <TransactionsTable>
-                <tbody>
-                    <tr>
-                        <td width="50%">Website development</td>
-                        <td>
-                            <PriceHighlight variant="income">
-                                $5.000
-                            </PriceHighlight>
-                        </td>
-                        <td>Sale</td>
-                        <td>11/20/2022</td>
-                    </tr>
-                    <tr>
-                        <td width="50%">New Gaming PC</td>
-                        <td>
-                            <PriceHighlight variant="outcome">
-                                -$3.000
-                            </PriceHighlight>
-                        </td>
-                        <td>Personal Expenses</td>
-                        <td>11/20/2022</td>
-                    </tr>
-                   
-                </tbody>
-            </TransactionsTable>
+
+                <SearchForm />
+                <TransactionsTable>
+                    <tbody>
+                        {transactions.map(transaction => {
+                            return (
+                                <tr key={transaction.id}>
+                                    <td width="50%">{transaction.description}</td>
+                                    <td>
+                                        <PriceHighlight variant={transaction.type}>
+                                            {transaction.price}
+                                        </PriceHighlight>
+                                    </td>
+                                    <td>{transaction.category}</td>
+                                    <td>{transaction.createdAt}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </TransactionsTable>
             </TransactionsContainer>
         </div>
     )
