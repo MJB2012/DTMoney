@@ -38,7 +38,7 @@ export const Content = styled(Dialog.Content)`
             background: ${props => props.theme['gray-900']};
             color: ${props => props.theme['gray-300']};
             padding: 1rem;
-
+            font-family: 'Roboto Condensed', sans-serif;
             
 
 
