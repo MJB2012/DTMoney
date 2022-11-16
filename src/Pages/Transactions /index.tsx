@@ -23,7 +23,7 @@ export function Transactions() {
         const response = await fetch('http://localhost:3333/transactions')
         const data = await response.json()
 
-        console.log(data)
+        setTransactions(data)
     }
 
     useEffect(() => {
