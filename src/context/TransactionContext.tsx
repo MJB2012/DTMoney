@@ -19,7 +19,7 @@ interface TransactionsProviderProps {
     children: ReactNode
 }
 
-export const TransactionContext = createContext({} as TransactionContextType);
+export const TransactionsContext = createContext({} as TransactionContextType);
 
 export function TransactionsProvider ({ children }: TransactionsProviderProps) {
 
@@ -38,8 +38,8 @@ export function TransactionsProvider ({ children }: TransactionsProviderProps) {
 
 
     return (
-        <TransactionContext.Provider value = {{ transactions }}>
+        <TransactionsContext.Provider value = {{ transactions }}>
             {children}
-        </TransactionContext.Provider>
+        </TransactionsContext.Provider>
     )
 }

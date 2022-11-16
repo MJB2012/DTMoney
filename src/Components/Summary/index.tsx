@@ -1,40 +1,63 @@
-import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar, CurrencyDollarSimple } from "phosphor-react";
+import { ArrowCircleDown, ArrowCircleUp, CurrencyDollarSimple } from "phosphor-react";
+import { useContext } from "react";
+import { TransactionsContext } from "../../context/TransactionContext";
 import { SummaryCard, SummaryContainer } from "./styles";
 
 export function Summary() {
-    return (
-        
-        <SummaryContainer>
-            <SummaryCard>
-                <header>
-                    <span>
-                        Income
-                    </span>
-                    <ArrowCircleUp size={32} color="#00b37e" />
-                </header>
-                <strong>$5.000</strong>
-            </SummaryCard>
-           
-            <SummaryCard>
-                <header>
-                    <span>
-                        Expenses
-                    </span>
-                    <ArrowCircleDown size={32} color="#f75a68" />
-                </header>
-                <strong>$2.000</strong>
-            </SummaryCard>
-          
-            <SummaryCard variant="green">
-                <header>
-                    <span>
-                        Balance
-                    </span>
-                    <CurrencyDollarSimple size={32} color="#fff" />
-                </header>
-                <strong>$3.000</strong>
-            </SummaryCard>
+    
+    const { transactions } = useContext(TransactionsContext);
 
-        </SummaryContainer>
-    )
-}
+    const summary = transactions.reduce(
+        (acc, transaction) => {
+            if (transaction.type ==='income') {
+                acc.income += transaction.price;
+                acc.total += transaction.price;
+            } else {
+                acc.outcome += transaction.price;
+                acc.total -= transaction.price
+            }
+            
+            return acc
+        },
+         { 
+            income: 0 , 
+            outcome: 0, 
+            total: 0 
+            }
+        )
+        return (
+        
+            <SummaryContainer>
+                <SummaryCard>
+                    <header>
+                        <span>
+                        Income
+                        </span>
+                        <ArrowCircleUp size={32} color="#00b37e" />
+                    </header>
+                    <strong>{ summary.income }</strong>
+                </SummaryCard>
+           
+             <SummaryCard>
+                    <header>
+                        <span>
+                            Expenses
+                        </span>
+                        <ArrowCircleDown size={32} color="#f75a68" />
+                    </header>
+                    <strong>{ summary.outcome }</strong>
+                </SummaryCard>
+          
+             <SummaryCard variant="green">
+                  <header>
+                        <span>
+                            Balance
+                        </span>
+                        <CurrencyDollarSimple size={32} color="#fff" />
+                    </header>
+                    <strong>{ summary.total }</strong>
+                </SummaryCard>
+
+            </SummaryContainer>
+            )
+        }
