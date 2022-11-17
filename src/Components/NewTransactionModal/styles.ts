@@ -58,8 +58,14 @@ export const Content = styled(Dialog.Content)`
             cursor: pointer;
             font-family: 'Roboto Condensed', sans-serif;
             font-size: 1.3rem;
+            cursor: pointer;
 
-            &:hover {
+            &:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
+
+            &:not(:disabled):hover {
                 background: ${props => props.theme['green-700']};
                 transition: background-color 0.1s;
             }

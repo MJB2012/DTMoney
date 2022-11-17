@@ -32,7 +32,7 @@ export const SearchFormContainer = styled.form`
         cursor: pointer;
 
             &:disabled {
-                opacity: 0.7;
+                opacity: 0.4;
                 cursor: not-allowed;
             }
 
