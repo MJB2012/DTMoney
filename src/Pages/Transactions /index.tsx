@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useContextSelector } from "use-context-selector";
 import { Header } from "../../Components/Header";
 import { NewTransactionModal } from "../../Components/NewTransactionModal";
 import { Summary } from "../../Components/Summary";
@@ -9,7 +10,9 @@ import { PriceHighlight, TransactionsContainer, TransactionsTable } from "./styl
 
 
 export function Transactions() {
-    const { transactions }  = useContext(TransactionsContext);
+    const transactions = useContextSelector(TransactionsContext, (context) => {
+        return context.transactions;
+    });
 
         return (
             <div>
