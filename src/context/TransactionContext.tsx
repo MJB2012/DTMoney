@@ -52,7 +52,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     )
 
     const createTransaction = useCallback(
-        async (data: CreateTransactionInput) => {
+        async (data: CreateTransactionInput) => { 
         const { description, price, category, type } = data
 
         const response = await api.post('transactions', {
@@ -69,7 +69,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
    
     useEffect(() => {
         fetchTransactions()
-    }, [])
+    }, [fetchTransactions])
 
 
     return (
